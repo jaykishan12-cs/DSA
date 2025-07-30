@@ -1,0 +1,119 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define SS 10
+#define STACK_OVERFLOW 0
+#define STACK_UNDERFLOW -32768
+#define PUSH_SUCCESS 2
+#define INVALID_NUMBER 1
+
+typedef struct Stack{
+	int top;
+	int nums[SS];
+}Stack;
+
+int isEmpty(Stack s)
+{
+	if(s.top == -1)
+		return 1;
+
+	return 0;
+}
+
+int isFull(Stack s)
+{
+	if(s.top == SS -1)
+		return 1;
+
+	return 0;
+}
+
+int push(Stack *ps,int x)
+{
+	if(isFull(*ps))
+	{
+		return STACK_OVERFLOW;
+	}
+
+	ps->top++;
+	ps->nums[ps->top] = x;
+
+	return PUSH_SUCCESS;
+}
+int pop(Stack *ps)
+{
+	int temp;
+	if(isEmpty(*ps))
+		 return STACK_UNDERFLOW;
+
+	return ps->nums[ps->top--];
+}
+
+int peek(Stack s)
+{
+	 if(isEmpty(s))
+		return STACK_UNDERFLOW;
+
+	return s.nums[s.top];
+
+}
+void display(Stack s)
+{
+	int i;
+	for(i = s.top ;i>=0;i--)
+	{
+		printf("%d ",s.nums[i]);
+	}
+	printf("\n");
+}
+
+void displayRev(Stack s)
+{
+    int i;
+   for (int i = 0; i <= s.top; i++) {
+        if (s.nums[i] >= 'A' && s.nums[i] <= 'F') 
+            printf("%c ", s.nums[i]);           
+        else
+            printf("%d ", s.nums[i]);             
+    }
+	printf("\n");
+}
+
+void convert(int decimal,int base,Stack *s)
+{
+    
+    int res[100],i=0;
+
+    while(decimal > 0)
+    {
+        res[i] = decimal%base;
+        decimal = decimal / base;
+        i++;
+    }
+    for (int j = i - 1; j >= 0; j--) {
+        if (res[j] < 10)
+            push(s,res[j]);
+        else
+            push(s,65+res[j]-10);
+            //printf("%c", 'A' + res[j] - 10);  // For 10–15: A–F
+    }
+}
+
+
+void main()
+{
+	Stack s;
+	int choice,element,status;
+	s.top =-1;
+
+    int decimal,base;
+
+    printf("Enter Decimal Number : ");
+    scanf("%d",&decimal);
+
+    printf("Enter Base to convert in :");
+    scanf("%d",&base);
+
+    convert(decimal,base,&s);
+	
+    displayRev(s);
+}
