@@ -15,7 +15,7 @@
 #define MODEO 6
 
 typedef struct {
-    int items[SS];
+    char items[SS];
     int top;
 }Stack;
 
