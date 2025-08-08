@@ -30,7 +30,6 @@ void push(Stack *ps,char symbol)
         return;
     }
 
-
     ps->items[++ps->top] = symbol;
 }
 
