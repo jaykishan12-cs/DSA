@@ -168,7 +168,7 @@ int main()
     printf("Enter string: ");
     gets(string);
  
-    
+    printf("%d",s.top);
     if(check(&s,string))
         printf("\n VALID PARNATEHSIS");
     else
