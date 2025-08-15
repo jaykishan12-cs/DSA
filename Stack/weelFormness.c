@@ -77,7 +77,7 @@ bool check(char str[])
                     int closing = pop(&s);
                     int type2 = getType(closing);
                     if (type2 != LEFTPARAN)
-                    return false;
+                        return false;
                 
                 break;
         }
