@@ -9,6 +9,10 @@ typedef struct Node{
 
 Node *head = NULL;
 
+int isEmpty()
+{
+    return head  == NULL;
+}
 //to accept the data and the user will pass the string 
 int accept(char *str)
 {
@@ -140,7 +144,7 @@ void insertBefore()
 void deleteFromBegining()
 {
     Node* current;
-    if(head == NULL)
+    if(isEmpty())
     {
         printf("\n List is emptyt Nothing to delete");
         return;
@@ -155,7 +159,7 @@ void deleteFromBegining()
 void deleteFromEnd()
 {
     Node *current,*follow;
-    if(head == NULL)
+    if(isEmpty())
     {
         printf("\n EMpty list nothing to delete");
         return;
@@ -184,7 +188,7 @@ void deleteElement()
 {
     Node *current,*follow;
     int element = accept("\n Enter Element to delete: ");
-    if(head == NULL)
+    if(isEmpty())
     {
         printf("\n List is Empty");
         return;
@@ -214,12 +218,62 @@ void deleteElement()
     free(current);
     
 }
+//to reverse a linked list using three pointer approach
+void reverse()
+{
+    Node *current,*follow,*ahead;
+    if(isEmpty())
+    {
+        printf("\n List is empty ! nothing to reverse");
+        return;
+    }
 
+    current = head;
+    follow = NULL;
+    
+
+    while(current != NULL)
+    {
+        ahead = current->next;
+        current->next = follow;
+        follow= current;
+        current = ahead;
+    }
+
+    head = follow;
+    printf("\n List Reversed");
+}
+//to search a node in linked list
+void search()
+{
+    Node *current;
+    int key;
+    key = accept("\nEnter data to search : ");
+    if(isEmpty())
+    {
+        printf("\n List is Empty nothing to search");
+        return;
+    }
+
+    current = head;
+    while(current != NULL && current->data != key)
+    {
+        current = current->next;
+    }
+
+    if(current == NULL)
+    {
+        printf("\n Element NOt found");
+        return;
+    }
+    printf("\n %d found",key);
+
+}
 //to traerse / display a linked list
 void traverse()
 {
     Node *current;
-    if(head == NULL)
+    if(isEmpty())
     {
         printf("\n List is empty!!");
         return;
@@ -240,8 +294,8 @@ int main()
     while(1)
     {
         printf("\n ------ MENU ------");
-        printf("\n 1.Insert At Begining\n2.Insert At End \n3.Insert After \n 4.Insert Before");
-        printf("\n 5.Delete Element from Begining\n6.Delete Element from End \n7.delete Element \n 8.Show list \n9.Exit");
+        printf("\n1.Insert At Begining\n2.Insert At End\n3.Insert After\n4.Insert Before");
+        printf("\n5.Delete Element from Begining\n6.Delete Element from End\n7.delete Element\n8.Show list\n9.Reverse List\n10.Search\n11.Exit");
         
          printf("\n Enter Choice : ");
          scanf("%d",&choice);
@@ -281,6 +335,14 @@ int main()
                 break;
 
             case 9:
+                reverse();
+                break;
+            
+            case 10 :
+                search();
+                break;
+
+            case 11:
                 exit(EXIT_SUCCESS);
          }
     }
