@@ -19,7 +19,7 @@ void heapup(int x[],int newnode){
 	int parentnode,temp;
 	if(newnode>0){
 		parentnode=(newnode-1)/2;
-		if(x[parentnode]<x[newnode]){
+		if(x[parentnode]>x[newnode]){
 			temp=x[parentnode];
 			x[parentnode]=x[newnode];
 			x[newnode]=temp;
@@ -34,7 +34,7 @@ void heapdown(int x[],int root,int lastIndex){
 	rightchildIdx=root*2+2;//rightchildIdx=leftchildIdx+1
 	if(leftchildIdx<=lastIndex){
 		if(rightchildIdx<=lastIndex){
-			if(x[leftchildIdx]>x[rightchildIdx])
+			if(x[leftchildIdx]<x[rightchildIdx])
 				largerchildIdx=leftchildIdx;
 			else
 				largerchildIdx=rightchildIdx;
@@ -42,7 +42,7 @@ void heapdown(int x[],int root,int lastIndex){
 		else
 			largerchildIdx=leftchildIdx;
 
-		if(x[root]<x[largerchildIdx]){
+		if(x[root]>x[largerchildIdx]){
 			temp=x[root];
 			x[root]=x[largerchildIdx];
 			x[largerchildIdx]=temp;
