@@ -72,7 +72,7 @@ void addPolynomial(Node **head1,Node **head2,Node **res)
         {
             sum = curr1->coeff + curr2->coeff;
             insert(res,sum,curr1->power);
-
+            
             curr1 = curr1->next;
             curr2 = curr2->next;
         }else if(curr1->power > curr2->power)
